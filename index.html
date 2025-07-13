@@ -587,27 +587,6 @@
         </div>
     </div>
 
-    <script>
-        // Animation d'apparition des slides au scroll
-        const slides = document.querySelectorAll('.slide');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'slideIn 0.8s ease-out forwards';
-                }
-            });
-        });
 
-        slides.forEach(slide => {
-            observer.observe(slide);
-        });
-
-        // Effet de parallaxe subtil
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
-            document.body.style.backgroundPosition = `center ${rate}px`;
-        });
-    </script>
 </body>
 </html>
