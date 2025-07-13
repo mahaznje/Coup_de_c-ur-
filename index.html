@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les coups de cœur de Maha</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .slide:nth-child(2) { animation-delay: 0.2s; }
+        .slide:nth-child(3) { animation-delay: 0.4s; }
+        .slide:nth-child(4) { animation-delay: 0.6s; }
+
+        h1 {
+            font-size: 3.5em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #4a5568;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #2d3748;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
+        }
+
+        .profile-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .profile-card {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .company-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .company-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .company-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 15px;
+        }
+
+        .company-name {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .company-location {
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .company-details {
+            margin: 15px 0;
+        }
+
+        .company-details p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .contact-info h4 {
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .contact-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #764ba2;
+        }
+
+        .values-section {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .emoji {
+            font-size: 2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .tech-tag {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            h2 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Titre -->
+        <div class="slide">
+            <h1>Les coups de cœur de Maha 🧑‍💻</h1>
+            <div style="text-align: center; font-size: 1.3em; color: #718096; margin-top: 20px;">
+                <p style="margin-top: 15px;">🎯 <strong>Objectif :</strong> Intégrer une entreprise innovante en Suisse romande</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Qui suis-je -->
+        <div class="slide">
+            <h2>👩‍💻 Qui suis-je ?</h2>
+            <div class="profile-section">
+                <div class="profile-card">
+                    <h3>Profil</h3>
+                    <p><strong>Junior Software Engineer</strong></p>
+                    <p>Passionnée, proactive et rigoureuse</p>
+                    <p>🌐 <strong>Trilingue :</strong> Français 🇫🇷 | Arabe 🇹🇳 | Anglais 🇬🇧</p>
+                </div>
+                <div class="profile-card">
+                    <h3>Formation & Expérience</h3>
+                    <p>🎓 <strong>Master en Business Intelligence</strong></p>
+                    <p>Développement Web & Mobile (Fullstack)</p>
+                    <p>💼 <strong>Expériences :</strong> ERP, automatisation réseau, interface clients, projets BI</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Vision et valeurs -->
+        <div class="slide">
+            <h2>🌱 Ma vision, mes valeurs</h2>
+            <div class="values-section">
+                <div style="margin-bottom: 30px;">
+                    <h3>🎯 Vision</h3>
+                    <p>Commencer ma vie professionnelle dans une entreprise qui valorise la créativité, l'apprentissage et l'impact, et y créer des solutions utiles qui allient technologie et valeur humaine.</p>
+                </div>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <span class="emoji">🎨</span>
+                        <strong>Créativité</strong>
+                    </div>
+                    <div class="value-item">
+                        <span class="emoji">🔍</span>
+                        <strong>Curiosité</strong>
+                    </div>
+                    <div class="value-item">
+                        <span class="emoji">🤝</span>
+                        <strong>Sens du collectif</strong>
+                    </div>
+                    <div class="value-item">
+                        <span class="emoji">💎</span>
+                        <strong>Authenticité</strong>
+                    </div>
+                    <div class="value-item">
+                        <span class="emoji">🚀</span>
+                        <strong>Persévérance</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Slide 5: Domaines d'expertise -->
+        <div class="slide">
+            <h2>💻 Mes domaines d'expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>💻 Développement Web/Mobile</h3>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">Laravel</span>
+                        <span class="tech-tag">VueJS</span>
+                        <span class="tech-tag">Symfony</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>⚙️ Automatisation</h3>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Config réseau</span>
+                        <span class="tech-tag">Processus industriels</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>🔍 QA / Test Logiciel</h3>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Débogage</span>
+                        <span class="tech-tag">Tests unitaires</span>
+                        <span class="tech-tag">Automatisation</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>🧠 IA & Données</h3>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Analyse</span>
+                        <span class="tech-tag">Modélisation</span>
+                        <span class="tech-tag">Dashboards</span>
+                        <span class="tech-tag">BI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Entreprises ciblées -->
+        <div class="slide">
+            <h2>🏢 Mes coups de cœur - Entreprises ciblées</h2>
+            <div class="companies-grid">
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo">EL</div>
+                        <div>
+                            <div class="company-name">ELCA</div>
+                            <div class="company-location">Lausanne</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <p><strong>Domaine :</strong> Développement, QA</p>
+                        <p><strong>Mon apport :</strong> Développement fullstack, automatisation QA</p>
+                        <p><strong>Proposition :</strong> Automatiser le processus de test pour projets clients récurrents</p>
+                    </div>
+                    <div class="contact-info">
+                        <h4>📞 Contact potentiel</h4>
+                        <p>Chef de projet Dev / Responsable RH</p>
+                        <p>Email : <a href="mailto:careers@elca.ch" class="contact-link">careers@elca.ch</a></p>
+                        <p>LinkedIn : <a href="https://www.linkedin.com/company/elca-informatique/" class="contact-link">ELCA Informatique</a></p>
+                    </div>
+                </div>
+
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo">NX</div>
+                        <div>
+                            <div class="company-name">Nexthink</div>
+                            <div class="company-location">Prilly</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <p><strong>Domaine :</strong> UX, Test</p>
+                        <p><strong>Mon apport :</strong> Scripts QA, dashboards UX</p>
+                        <p><strong>Proposition :</strong> Optimiser l'expérience utilisateur par l'analyse de données</p>
+                    </div>
+                    <div class="contact-info">
+                        <h4>📞 Contact potentiel</h4>
+                        <p>Talent Acquisition / UX Team Lead</p>
+                        <p>Email : <a href="mailto:careers@nexthink.com" class="contact-link">careers@nexthink.com</a></p>
+                        <p>LinkedIn : <a href="https://www.linkedin.com/company/nexthink/" class="contact-link">Nexthink</a></p>
+                    </div>
+                </div>
+
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo">GI</div>
+                        <div>
+                            <div class="company-name">Giotto.ai</div>
+                            <div class="company-location">Lausanne</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <p><strong>Domaine :</strong> IA cognitive</p>
+                        <p><strong>Mon apport :</strong> Prototypage interfaces IA</p>
+                        <p><strong>Proposition :</strong> Développer des interfaces intuitives pour l'IA conversationnelle</p>
+                    </div>
+                    <div class="contact-info">
+                        <h4>📞 Contact potentiel</h4>
+                        <p>CTO / R&D Manager</p>
+                        <p>Email : <a href="mailto:careers@giotto.ai" class="contact-link">careers@giotto.ai</a></p>
+                        <p>LinkedIn : <a href="https://www.linkedin.com/company/giotto-ai/" class="contact-link">Giotto.ai</a></p>
+                    </div>
+                </div>
+
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo">AK</div>
+                        <div>
+                            <div class="company-name">Akselos</div>
+                            <div class="company-location">Lausanne</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <p><strong>Domaine :</strong> Simulation</p>
+                        <p><strong>Mon apport :</strong> WebApps + automatisation des flux</p>
+                        <p><strong>Proposition :</strong> Créer des interfaces web pour visualiser les simulations</p>
+                    </div>
+                    <div class="contact-info">
+                        <h4>📞 Contact potentiel</h4>
+                        <p>HR Manager / Tech Lead</p>
+                        <p>Email : <a href="mailto:careers@akselos.com" class="contact-link">careers@akselos.com</a></p>
+                        <p>LinkedIn : <a href="https://www.linkedin.com/company/akselos/" class="contact-link">Akselos</a></p>
+                    </div>
+                </div>
+
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo">CS</div>
+                        <div>
+                            <div class="company-name">CSEM</div>
+                            <div class="company-location">Neuchâtel</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <p><strong>Domaine :</strong> Automatisation / IA</p>
+                        <p><strong>Mon apport :</strong> Dashboard & analyse data</p>
+                        <p><strong>Proposition :</strong> Développer des outils d'analyse pour l'innovation technologique</p>
+                    </div>
+                    <div class="contact-info">
+                        <h4>📞 Contact potentiel</h4>
+                        <p>Innovation Manager / HR</p>
+                        <p>Email : <a href="mailto:info@csem.ch" class="contact-link">info@csem.ch</a></p>
+                        <p>LinkedIn : <a href="https://www.linkedin.com/company/csem/" class="contact-link">CSEM</a></p>
+                    </div>
+                </div>
+
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo">FA</div>
+                        <div>
+                            <div class="company-name">Flux Automation</div>
+                            <div class="company-location">Vevey</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <p><strong>Domaine :</strong> Automatisation</p>
+                        <p><strong>Mon apport :</strong> QA Python / Script industriel</p>
+                        <p><strong>Proposition :</strong> Automatiser les processus de contrôle qualité</p>
+                    </div>
+                    <div class="contact-info">
+                        <h4>📞 Contact potentiel</h4>
+                        <p>Project Leader / Engineering Manager</p>
+                        <p>Email : <a href="mailto:contact@flux-automation.ch" class="contact-link">contact@flux-automation.ch</a></p>
+                        <p>LinkedIn : <a href="https://www.linkedin.com/company/flux-automation/" class="contact-link">Flux Automation</a></p>
+                    </div>
+                </div>
+
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo">OA</div>
+                        <div>
+                            <div class="company-name">Online Automation</div>
+                            <div class="company-location">Montreux</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <p><strong>Domaine :</strong> Contrôle-commande</p>
+                        <p><strong>Mon apport :</strong> Interface Python config</p>
+                        <p><strong>Proposition :</strong> Développer des interfaces de configuration intuitives</p>
+                    </div>
+                    <div class="contact-info">
+                        <h4>📞 Contact potentiel</h4>
+                        <p>Ingénieur Système / Chef de projet</p>
+                        <p>Email : <a href="mailto:info@online-automation.ch" class="contact-link">info@online-automation.ch</a></p>
+                        <p>LinkedIn : <a href="https://www.linkedin.com/company/online-automation/" class="contact-link">Online Automation</a></p>
+                    </div>
+                </div>
+
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo">TR</div>
+                        <div>
+                            <div class="company-name">TestResults</div>
+                            <div class="company-location">Suisse Romande</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <p><strong>Domaine :</strong> Test logiciel IA</p>
+                        <p><strong>Mon apport :</strong> Implémentation tests visuels</p>
+                        <p><strong>Proposition :</strong> Intégrer l'IA dans les processus de test automatisés</p>
+                    </div>
+                    <div class="contact-info">
+                        <h4>📞 Contact potentiel</h4>
+                        <p>QA Manager / CTO</p>
+                        <p>Email : <a href="mailto:careers@testresults.ch" class="contact-link">careers@testresults.ch</a></p>
+                        <p>LinkedIn : <a href="https://www.linkedin.com/company/testresults/" class="contact-link">TestResults</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide finale: Formation et opportunités -->
+        <div class="slide">
+            <div class="cta-section">
+                <h2>🎯 Objectifs de formation</h2>
+                <p>Cette présentation s'inscrit dans le cadre de ma formation professionnelle pour identifier et cibler les entreprises qui correspondent à mon profil et mes aspirations.</p>
+                <p><strong>Prochaines étapes :</strong></p>
+                <div style="text-align: left; margin: 20px 0; font-size: 1.1em;">
+                    <p>• Approfondir la connaissance de ces entreprises</p>
+                    <p>• Adapter mes candidatures selon leurs besoins spécifiques</p>
+                    <p>• Développer mon réseau professionnel dans ces secteurs</p>
+                    <p>• Préparer des projets concrets à présenter</p>
+                </div>
+                <div style="margin-top: 30px; font-size: 1.4em;">
+                    <p>Merci pour votre attention 🙏</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animation d'apparition des slides au scroll
+        const slides = document.querySelectorAll('.slide');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideIn 0.8s ease-out forwards';
+                }
+            });
+        });
+
+        slides.forEach(slide => {
+            observer.observe(slide);
+        });
+
+        // Effet de parallaxe subtil
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            document.body.style.backgroundPosition = `center ${rate}px`;
+        });
+    </script>
+</body>
+</html>
